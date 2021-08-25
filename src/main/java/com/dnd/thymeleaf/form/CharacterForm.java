@@ -1,17 +1,8 @@
-package com.dnd.thymeleaf.model;
+package com.dnd.thymeleaf.form;
 
-public class Character {
+public class CharacterForm {
     private String firstName;
     private String lastName;
-
-    public Character() {
-
-    }
-
-    public Character(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -28,6 +19,4 @@ public class Character {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
 }
-
