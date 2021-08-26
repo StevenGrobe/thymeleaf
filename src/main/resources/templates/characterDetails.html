@@ -2,10 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Add Person</title>
+    <title>Character Details</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}"/>
 </head>
 <body>
-
+<h1>Character Details</h1>
+    <div>
+        <table border="1">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Job</th>
+                <th>Hp</th>
+            </tr>
+            <tr>
+                <td th:utext="${personnage.Id}">...</td>
+                <td th:utext="${personnage.Nom}">...</td>
+                <td th:utext="${personnage.Job}">...</td>
+                <td th:utext="${personnage.Hp}">...</td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

@@ -51,8 +51,13 @@ public class MainController {
     @RequestMapping(value = { "/addCharacter" }, method = RequestMethod.POST)
     public String saveCharacter(Model model, //
                              @ModelAttribute("characterForm") CharacterForm characterForm) {
+        int max = characterDao.findAll().stream()
+                .map(personnage -> personnage.getId())
+                .max(Integer::compare)
+                .orElse(0);
 
-        int Id = characterForm.getId();
+
+        int Id = max+1;
         String Nom = characterForm.getNom();
         String Job = characterForm.getJob();
         int Hp = characterForm.getHp();
@@ -69,8 +74,8 @@ public class MainController {
     }
 
     @RequestMapping(value = {"/characterDetails/{id}"}, method = RequestMethod.GET)
-    public Character afficherUnPersonnage(Model model, @PathVariable int id) {
-        model.addAttribute("character", characterDao.findById(id));
+    public String afficherUnPersonnage(Model model, @PathVariable int id) {
+        model.addAttribute("personnage", characterDao.findById(id));
         return "characterDetails";
     }
 }
