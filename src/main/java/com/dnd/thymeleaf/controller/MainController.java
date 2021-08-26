@@ -3,27 +3,21 @@ package com.dnd.thymeleaf.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dnd.thymeleaf.dao.CharacterDaoImpl;
 import com.dnd.thymeleaf.form.CharacterForm;
 import com.dnd.thymeleaf.model.Character;
+import com.dnd.thymeleaf.dao.CharacterDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainController {
 
-    private static List<Character> characters = new ArrayList<Character>();
-
-    static {
-        characters.add(new Character(0, new String("Enryn Love"), "warrior", 20));
-        characters.add(new Character(1, new String("Rarder Aber"), "mage", 10));
-        characters.add(new Character(2, new String("Helia Willey"), "warrior", 17));
-        characters.add(new Character(3, new String("Anen Hancey"), "mage", 7));
-        characters.add(new Character(4, new String("Ryany Bourne"), "warrior", 12));
-    }
+    @Autowired
+    private CharacterDao characterDao;
 
     // Injectez (inject) via application.properties.
     @Value("${welcome.message}")
@@ -41,9 +35,7 @@ public class MainController {
 
     @RequestMapping(value = { "/characterList" }, method = RequestMethod.GET)
     public String characterList(Model model) {
-
-        model.addAttribute("characters", characters);
-
+        model.addAttribute("characters", characterDao.findAll());
         return "characterList";
     }
 
@@ -67,12 +59,18 @@ public class MainController {
 
         if (Nom != null && Nom.length() > 0) {
             Character newCharacter = new Character(Id, Nom, Job, Hp);
-            characters.add(newCharacter);
+            characterDao.save(newCharacter);
 
             return "redirect:/characterList";
         }
 
         model.addAttribute("errorMessage", errorMessage);
         return "addCharacter";
+    }
+
+    @RequestMapping(value = {"/characterDetails/{id}"}, method = RequestMethod.GET)
+    public Character afficherUnPersonnage(Model model, @PathVariable int id) {
+        model.addAttribute("character", characterDao.findById(id));
+        return "characterDetails";
     }
 }
