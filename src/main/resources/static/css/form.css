@@ -10,10 +10,12 @@ input {
   display: inline-block;
   float: left;
   margin-left: 1rem;
+  margin-bottom: 0.4rem;
 }
 
 select {
   display: inline-block;
   float: left;
   margin-left: 1rem;
+  margin-bottom: 0.4rem;
 }

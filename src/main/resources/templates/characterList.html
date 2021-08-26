@@ -12,11 +12,13 @@
 <div>
     <table border="1">
         <tr>
+            <th>Id</th>
             <th>Name</th>
             <th>Job</th>
             <th>Hp</th>
         </tr>
         <tr th:each ="character : ${characters}">
+            <td th:utext="${character.Id}">...</td>
             <td th:utext="${character.Nom}">...</td>
             <td th:utext="${character.Job}">...</td>
             <td th:utext="${character.Hp}">...</td>

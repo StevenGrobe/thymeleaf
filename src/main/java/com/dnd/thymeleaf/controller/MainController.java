@@ -36,7 +36,6 @@ public class MainController {
     public String index(Model model) {
 
         model.addAttribute("message", message);
-
         return "index";
     }
 
@@ -76,5 +75,4 @@ public class MainController {
         model.addAttribute("errorMessage", errorMessage);
         return "addCharacter";
     }
-
 }

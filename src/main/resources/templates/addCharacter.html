@@ -27,8 +27,8 @@
             <option value="mage">mage</option>
         </select>
         <label>Hp :</label>
-        <input type="range"  name="amountRange" min="1" max="25" value="1"  oninput="this.form.amountInput.value=this.value" th:field="*{Hp}" />
-        <input type="number" name="amountInput" min="1" max="25" value="1"  oninput="this.form.amountRange.value=this.value" />
+        <input type="range"  name="amountRange" min="1" max="25" value="1" oninput="this.form.amountInput.value=this.value" th:field="*{Hp}" />
+        <input type="number" name="amountInput" min="1" max="25" value="1" oninput="this.form.amountRange.value=this.value" style="border: none; margin: auto;" readonly/>
         <input type="submit" value="Create" />
     </div>
 </form>
