@@ -18,8 +18,11 @@ public class MainController {
     private static List<Character> characters = new ArrayList<Character>();
 
     static {
-        characters.add(new Character("Bill", "Gates"));
-        characters.add(new Character("Steve", "Jobs"));
+        characters.add(new Character(0, new String("Enryn Love"), "warrior", 20));
+        characters.add(new Character(1, new String("Rarder Aber"), "mage", 10));
+        characters.add(new Character(2, new String("Helia Willey"), "warrior", 17));
+        characters.add(new Character(3, new String("Anen Hancey"), "mage", 7));
+        characters.add(new Character(4, new String("Ryany Bourne"), "warrior", 12));
     }
 
     // Injectez (inject) via application.properties.
@@ -58,12 +61,13 @@ public class MainController {
     public String saveCharacter(Model model, //
                              @ModelAttribute("characterForm") CharacterForm characterForm) {
 
-        String firstName = characterForm.getFirstName();
-        String lastName = characterForm.getLastName();
+        int Id = characterForm.getId();
+        String Nom = characterForm.getNom();
+        String Job = characterForm.getJob();
+        int Hp = characterForm.getHp();
 
-        if (firstName != null && firstName.length() > 0 //
-                && lastName != null && lastName.length() > 0) {
-            Character newCharacter = new Character(firstName, lastName);
+        if (Nom != null && Nom.length() > 0) {
+            Character newCharacter = new Character(Id, Nom, Job, Hp);
             characters.add(newCharacter);
 
             return "redirect:/characterList";

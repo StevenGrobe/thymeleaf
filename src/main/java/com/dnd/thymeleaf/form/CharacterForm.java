@@ -1,22 +1,43 @@
 package com.dnd.thymeleaf.form;
 
 public class CharacterForm {
-    private String firstName;
-    private String lastName;
+    private int id;
+    private String nom;
+    private String job;
+    private int hp;
 
-    public String getFirstName() {
-        return firstName;
+    public CharacterForm() {
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public int getHp() {
+        return hp;
     }
 }

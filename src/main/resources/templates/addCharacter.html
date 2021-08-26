@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Add Person</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}"/>
 </head>
 <body>
 <h1>Create a Character:</h1>
@@ -16,13 +16,21 @@
 
 <form th:action="@{/addCharacter}"
       th:object="${characterForm}" method="POST">
-    First Name:
-    <input type="text" th:field="*{firstName}" />
-    <br/>
-    Last Name:
-    <input type="text" th:field="*{lastName}" />
-    <br/>
-    <input type="submit" value="Create" />
+    <div>
+        <label>Id:</label>
+        <input type="number" th:field="*{Id}" />
+        <label>Name:</label>
+        <input type="text" th:field="*{Nom}" />
+        <label>Job:</label>
+        <select th:field="*{Job}">
+            <option value="warrior">warrior</option>
+            <option value="mage">mage</option>
+        </select>
+        <label>Hp :</label>
+        <input type="range"  name="amountRange" min="1" max="25" value="1"  oninput="this.form.amountInput.value=this.value" th:field="*{Hp}" />
+        <input type="number" name="amountInput" min="1" max="25" value="1"  oninput="this.form.amountRange.value=this.value" />
+        <input type="submit" value="Create" />
+    </div>
 </form>
 
 <br/>
