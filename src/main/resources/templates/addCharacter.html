@@ -18,6 +18,8 @@
 <form th:action="@{/addCharacter}"
       th:object="${characterForm}" method="POST">
     <div>
+        <label>Id:</label>
+        <input type="text" th:field="*{Id}" />
         <label>Name:</label>
         <input type="text" th:field="*{Nom}" />
         <label>Job:</label>

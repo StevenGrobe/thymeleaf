@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 
 @Controller
@@ -15,6 +18,9 @@ public class MainController {
 
     @Autowired
     private CharacterDao characterDao;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     // Injectez (inject) via application.properties.
     @Value("${welcome.message}")
@@ -32,8 +38,9 @@ public class MainController {
 
     @RequestMapping(value = { "/characterList" }, method = RequestMethod.GET)
     public String characterList(Model model) {
-        model.addAttribute("characters", characterDao.findAll());
-
+        String url = "http://localhost:8081/Personnages";
+        List<Character> c = restTemplate.getForObject(url,List.class);
+        model.addAttribute("Character", c);
         return "characterList";
     }
 
@@ -47,12 +54,23 @@ public class MainController {
     }
 
     @RequestMapping(value = { "/addCharacter" }, method = RequestMethod.POST)
-    public String saveCharacter(Model model, //
-                             @ModelAttribute("characterForm") CharacterForm characterForm) {
+    public String saveCharacter(Model model, @ModelAttribute("characterForm") CharacterForm characterForm) {
+        String url = "http://localhost:8081/Personnages/";
+        CharacterForm cform = restTemplate.postForObject(url, characterForm, CharacterForm.class);
+        String name = characterForm.getNom();
+        String job = characterForm.getJob();
+        int hp = characterForm.getHp();
+
         int max = characterDao.findAll().stream()
                 .map(personnage -> personnage.getId())
                 .max(Integer::compare)
                 .orElse(0);
+
+
+        // int max = characterDao.findAll().stream()
+        //         .map(personnage -> personnage.getId())
+        //         .max(Integer::compare)
+        //         .orElse(0);
 
 
         int Id = max+1;
@@ -73,7 +91,11 @@ public class MainController {
 
     @RequestMapping(value = {"/characterDetails/{id}"}, method = RequestMethod.GET)
     public String afficherUnPersonnage(Model model, @PathVariable int id) {
-        model.addAttribute("character", characterDao.findById(id));
+        String url = "http://localhost:8081/Personnages/";
+        Character c = restTemplate.getForObject(url + id,Character.class);
+
+        model.addAttribute("Character", c);
+        System.out.println(c);
         return "characterDetails";
     }
 }

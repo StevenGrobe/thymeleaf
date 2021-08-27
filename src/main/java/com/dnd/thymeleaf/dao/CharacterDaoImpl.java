@@ -1,4 +1,5 @@
 package com.dnd.thymeleaf.dao;
+import com.dnd.thymeleaf.controller.ApiController;
 import com.dnd.thymeleaf.model.Character;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
@@ -35,17 +36,4 @@ public class CharacterDaoImpl implements CharacterDao {
         return character;
     }
 
-    // @Override
-    // public Character update(Character character) {
-    //     findById(character.getId()).setNom(character.getNom());
-    //     findById(character.getId()).setJob(character.getJob());
-    //     findById(character.getId()).setHp(character.getHp());
-    //     return null;
-    // }
-//
-    // @Override
-    // public Character deleteById(int id) {
-    //     characters.remove(id);
-    //     return null;
-    // }
 }
