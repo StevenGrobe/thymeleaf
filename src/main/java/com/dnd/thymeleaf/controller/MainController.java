@@ -1,9 +1,5 @@
 package com.dnd.thymeleaf.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.dnd.thymeleaf.dao.CharacterDaoImpl;
 import com.dnd.thymeleaf.form.CharacterForm;
 import com.dnd.thymeleaf.model.Character;
 import com.dnd.thymeleaf.dao.CharacterDao;
@@ -12,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 public class MainController {
@@ -36,6 +33,7 @@ public class MainController {
     @RequestMapping(value = { "/characterList" }, method = RequestMethod.GET)
     public String characterList(Model model) {
         model.addAttribute("characters", characterDao.findAll());
+
         return "characterList";
     }
 
@@ -75,7 +73,7 @@ public class MainController {
 
     @RequestMapping(value = {"/characterDetails/{id}"}, method = RequestMethod.GET)
     public String afficherUnPersonnage(Model model, @PathVariable int id) {
-        model.addAttribute("personnage", characterDao.findById(id));
+        model.addAttribute("character", characterDao.findById(id));
         return "characterDetails";
     }
 }

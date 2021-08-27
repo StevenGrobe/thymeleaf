@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <title>Character Details</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <h1>Character Details</h1>
+<a href="/characterList">Back</a>
+<a href="/addCharacter">Add Character</a>
+<br/><br/>
     <div>
         <table border="1">
             <tr>
@@ -16,12 +19,13 @@
                 <th>Hp</th>
             </tr>
             <tr>
-                <td th:utext="${personnage.Id}">...</td>
-                <td th:utext="${personnage.Nom}">...</td>
-                <td th:utext="${personnage.Job}">...</td>
-                <td th:utext="${personnage.Hp}">...</td>
+                <td th:utext="${character.Id}">...</td>
+                <td th:utext="${character.Nom}">...</td>
+                <td th:utext="${character.Job}">...</td>
+                <td th:utext="${character.Hp}">...</td>
             </tr>
         </table>
     </div>
+
 </body>
 </html>
